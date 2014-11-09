@@ -1,3 +1,5 @@
-/**
- * Created by adriel on 11/6/14.
- */
+function(doc) {
+    if (doc.type == "number") {
+        emit([doc.assigned, doc._id], doc)
+    }
+}

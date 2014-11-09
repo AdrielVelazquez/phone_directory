@@ -11,6 +11,5 @@ PHONE_DB = "numbers-db"
 # let custom config override defaults
 if os.environ.get('PHONE_NUMBER_CONFIG', False):
     import imp
-    imp.load_source('app.customconfig',
-        os.environ['PHONE_NUMBER_CONFIG'])
+    imp.load_source('app.customconfig', os.environ['PHONE_NUMBER_CONFIG'])
     from app.customconfig import *

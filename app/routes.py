@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from tools.phone_numbers import get_random_start_n, get_random_other_digits
+from tools.phone_numbers import get_phone_number
 
 quiz = Blueprint('SET', __name__, url_prefix='/SET')
 
@@ -10,6 +10,8 @@ def get_number():
     '''
     Requests a new number from couchdb
     '''
-    print request.args
-    number = get_random_start_n()
+    user = request.args.get("user")
+    if not user:
+        return {"error": "Must give a user argument in the request ?user=Adriel"}
+    number = get_phone_number(user=user)
     return {"number": number}
