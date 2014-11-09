@@ -1,7 +1,6 @@
 import json
 
-import connections
-from app.models.number_model import get_phone_model
+from connections import get_numbers_db
 
 def bulk_load(db, doc_list):
     db.update(doc_list)
@@ -40,10 +39,10 @@ def generate_all_phone_number_combinations():
             doc['_id'] = str(num) + str()
             doc["assigned"] = False
             list_of_numbers.append(doc)
-    bulk_load(connections.get_numbers_db(), list_of_numbers)
+    bulk_load(get_numbers_db(), list_of_numbers)
 
 if __name__ == "__main__":
-    ndb = connections.get_numbers_db()
+    ndb = get_numbers_db()
     area_codes_doc = load_codes()
     result = bulk_load(db=ndb, doc_list=[area_codes_doc])
 
