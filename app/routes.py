@@ -37,7 +37,7 @@ def unassign():
     Requests a new number from couchdb
     '''
     number = request.args.get("number")
-    if not number or len(number) != 10:
-        return {"error": "Must give a number argument in the assigned request ?user=Adriel"}
+    if not number or len(number) != 10 or number.isdigit() is False:
+        return {"error": "Must give a number argument in the assigned request ?number=2342342345"}
     details = unassign_number(number)
     return details

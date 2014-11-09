@@ -75,6 +75,8 @@ def get_custom_number(user, custom_number):
         return {"error": "Phone number is an invalid format main number is incorrect"}
     elif len(custom_number) != 10:
         return {"error": "Phone number is an invalid format length is less than 10"}
+    elif custom_number.isdigit() is False:
+        return {"error": "Phone number is not all digits"}
     doc = db.get(custom_number)
     if doc["assigned"]:
         return {"error": "Number already taken, leave number argument blank and random available will be assigned"}
