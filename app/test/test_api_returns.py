@@ -49,9 +49,9 @@ class TestPhone(unittest.TestCase):
         Test that a unique number is always generated
         '''
         numbers = set()
-        for i in range(1000):
+        for i in range(200):
             numbers.add(get_phone_number(user="Adriel"))
-        self.assertTrue(len(numbers) == 1000)
+        self.assertTrue(len(numbers) == 200)
 
     def test_responses(self):
         '''
@@ -60,10 +60,13 @@ class TestPhone(unittest.TestCase):
         self.app = app.test_client()
         response = self.app.get('/SET/number', content_type='application/x-www-form-urlencoded')
         self.assertEqual(response.status_code, 200)
+        self.assertTrue("error" in response.data)
         response = self.app.get('/SET/assigned', content_type='application/x-www-form-urlencoded')
         self.assertEqual(response.status_code, 200)
+        self.assertTrue("error" in response.data)
         response = self.app.get('/SET/unassign', content_type='application/x-www-form-urlencoded')
         self.assertEqual(response.status_code, 200)
+        self.assertTrue("error" in response.data)
 
 if __name__ == '__main__':
     unittest.main()
