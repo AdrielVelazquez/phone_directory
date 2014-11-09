@@ -55,3 +55,52 @@ def get_phone_number(user):
             found_number = True
     db.save(doc)
     return number
+
+
+def get_phone_number_v2(user):
+    db = get_numbers_db()
+    number_doc = db.view("numbers/aproved_phone_numbers",
+                     startkey=[False], endkey=[False, {}], limit=1).rows[0].value
+
+    number_doc["assigned"] = True
+    number_doc["user"] = user
+    db.save(number_doc)
+    return number_doc["_id"]
+
+def get_custom_number(user, custom_number):
+    db = get_numbers_db()
+    if int(custom_number[0]) < 2:
+        return {"error": "Phone number is an invalid format area code is invalid"}
+    elif int(custom_number[3]) < 2:
+        return {"error": "Phone number is an invalid format main number is incorrect"}
+    elif len(custom_number) != 10:
+        return {"error": "Phone number is an invalid format length is less than 10"}
+    doc = db.get(custom_number)
+    if doc["assigned"]:
+        return {"error": "Number already taken, leave number argument blank and random available will be assigned"}
+    else:
+        doc["user"] = user
+        doc["assigned"] = True
+        db.save(doc)
+        return {"number": custom_number}
+
+def get_phone_numbers_by_user(user):
+    db = get_numbers_db()
+    rows = db.view("users/number_by_user", startkey=user, endkey=user)
+    numbers = []
+    for row in rows:
+        numbers.append(row.value)
+    return numbers
+
+def unassign_number(number):
+    db = get_numbers_db()
+    doc = db.get(number)
+
+    if not doc or doc["assigned"] is False:
+        return {"Warning": "Phone number is already unassigned"}
+
+    doc["assigned"] = False
+    doc["user"] = None
+    db.save(doc)
+
+    return {"Info": "Successfully unassigned number ".format(number)}

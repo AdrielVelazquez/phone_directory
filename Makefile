@@ -9,7 +9,9 @@ VIRTUALENV_NAME ?= set_test
 config:
 
 install: virtualenv
-	. ./bin/activate && sudo apt-get install couchdb && python push-ddoc.py http://localhost:5984/numbers-db ./db/numbers-db/designs/numbers
+	. ./bin/activate && sudo apt-get install couchdb && python load_all.py && \
+	python push-ddoc.py http://localhost:5984/numbers-db ./db/numbers-db/designs/numbers && \
+	python push-ddoc.py http://localhost:5984/numbers-db ./db/numbers-db/designs/users
 
 test:
 	. ./bin/activate && nosetests  -sv ./app/test/
