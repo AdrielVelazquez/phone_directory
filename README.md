@@ -57,12 +57,17 @@ Arguments:
 
 **number**, not required, "Select a custom number"
 
+Ex: /SET/numner?user=Adriel
+
+
 
 /SET/unassign
 
 Arguments:
 
 **number**, required, "Unassign a number from it's user"
+
+Ex: /SET/numner?number=2002000000
 
 
 /SET/assigned
