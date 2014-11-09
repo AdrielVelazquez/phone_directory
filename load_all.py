@@ -15,8 +15,8 @@ def generate_all_phone_number_combinations():
     '''
     list_of_numbers = []
     ndb = get_numbers_db()
-    for area in range(200, 201):
-        for num in range(2000000, 2005000):
+    for area in range(200, 1000):
+        for num in range(2000000, 10000000):
             doc = get_phone_model()
             doc['_id'] = str(area) + str(num)
             doc["assigned"] = False
