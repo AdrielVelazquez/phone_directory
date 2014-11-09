@@ -53,5 +53,17 @@ class TestPhone(unittest.TestCase):
             numbers.add(get_phone_number(user="Adriel"))
         self.assertTrue(len(numbers) == 1000)
 
+    def test_responses(self):
+        '''
+        Testing that all the responses are properly happening
+        '''
+        self.app = app.test_client()
+        response = self.app.get('/SET/number', content_type='application/x-www-form-urlencoded')
+        self.assertEqual(response.status_code, 200)
+        response = self.app.get('/SET/assigned', content_type='application/x-www-form-urlencoded')
+        self.assertEqual(response.status_code, 200)
+        response = self.app.get('/SET/unassign', content_type='application/x-www-form-urlencoded')
+        self.assertEqual(response.status_code, 200)
+
 if __name__ == '__main__':
     unittest.main()
