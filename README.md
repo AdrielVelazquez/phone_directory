@@ -57,7 +57,7 @@ Arguments:
 
 **number**, not required, "Select a custom number"
 
-Ex: /SET/numner?user=Adriel
+Ex: /SET/number?user=Adriel
 
 
 
@@ -67,7 +67,7 @@ Arguments:
 
 **number**, required, "Unassign a number from it's user"
 
-Ex: /SET/numner?number=2002000000
+Ex: /SET/unassign?number=2002000000
 
 
 /SET/assigned
